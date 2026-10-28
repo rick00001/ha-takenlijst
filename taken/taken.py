@@ -454,9 +454,9 @@ def _main():
                 log.append({'id': nieuw_id(log), 'ts': ts, 'soort': 'samen_envelop', 'persoon': persoon,
                             'album': sa['album'], 'sticker': sa['volgorde'][m], 'mijlpaal': m + 1})
     elif a.actie == 'stickers':
-        # pakt albums/<album>.zip uit naar /config/www/stickers/<album>/ (alleen png en svg)
+        # pakt albums/<album>.zip uit naar /config/www/taken/stickers/<album>/ (alleen png en svg)
         import zipfile
-        doel0 = os.path.join(os.path.dirname(MAP.rstrip('/')), 'www', 'stickers')
+        doel0 = os.path.join(os.path.dirname(MAP.rstrip('/')), 'www', 'taken', 'stickers')
         for f in sorted(os.listdir(P('albums'))) if os.path.isdir(P('albums')) else []:
             if not f.endswith('.zip'):
                 continue

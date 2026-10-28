@@ -38,14 +38,28 @@ const tkObj = (v) => { if (v && typeof v === 'object' && !Array.isArray(v)) retu
 const tkEn = (l) => (l.length <= 1 ? l.join('') : `${l.slice(0, -1).join(', ')} en ${l[l.length - 1]}`);
 
 const TK_CSS = `
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=DM+Sans:wght@400;500;600&display=swap');
 :host{display:block}
 *{box-sizing:border-box}
 button{font:inherit;color:inherit}
-.root{--bg:#ece4d4;--card:#f7f2e8;--line:#ddd3c0;--ink:#2a2520;--mut:#6a6055;--acc:#5e4663;--acct:#5e4663;--ok:#4d6a49;--tint:#e3d9e4;--soft:#efe8da;--bad:#c4623a;--mat:#c8a14a;
- position:relative;background:var(--bg);color:var(--ink);font-family:'DM Sans',system-ui,sans-serif;font-size:clamp(11px,min(1.2vw,1.72vh),18px);font-size:clamp(11px,min(1.2vw,1.72dvh),18px);display:flex;flex-direction:column;padding:1em 1.4em;transition:background .3s,color .3s;border-radius:var(--ha-card-border-radius,12px)}
+.root{
+  --bg: var(--ha-card-background, var(--card-background-color));
+  --card: var(--ha-card-background, var(--card-background-color));
+  --line: var(--divider-color);
+  --ink: var(--primary-text-color);
+  --mut: var(--secondary-text-color);
+  --acc: var(--primary-color);
+  --acct: var(--primary-color);
+  --ok: var(--success-color,#4caf50);
+  --bad: var(--error-color,#f44336);
+  --mat: var(--warning-color,#ff9800);
+  --tint: rgba(var(--rgb-primary-color),0.15);
+  --soft: var(--secondary-background-color);
+  position:relative;
+  background:transparent;
+  color:var(--ink);
+  font-family:var(--paper-font-body1_-_font-family);
+}
 .root.vol{height:100vh;height:100dvh;overflow:hidden;border-radius:0}
-.root.dark{color-scheme:dark;--bg:#1c1814;--card:#29241e;--line:#3c352c;--ink:#d9ccb6;--mut:#a39787;--acc:#7a5a82;--acct:#cdb1d3;--ok:#93b58e;--tint:#3b3041;--soft:#383128;--bad:#e08a62;--mat:#d9b765}
 .wrap{flex:1;min-height:0;width:100%;max-width:1500px;margin:0 auto;display:flex;flex-direction:column}
 .serif{font-family:'Fraunces',Georgia,serif;font-weight:400}
 .col{display:flex;flex-direction:column;gap:1.2em;min-width:0}
@@ -217,20 +231,13 @@ class TakenCard extends HTMLElement {
     return undefined;
   }
 
-  _donker() {
-    const t = String(this._c.thema || 'auto').toLowerCase();
-    if (t === 'donker' || t === 'dark' || t === 'nacht') return true;
-    if (t === 'licht' || t === 'light' || t === 'dag') return false;
-    return !!this._h?.themes?.darkMode;
-  }
-
   _render() {
     if (!this._h || !this._c) return;
     const ae = this.shadowRoot.activeElement;
     if (ae && ae.tagName === 'INPUT') return; // niet storen tijdens het typen
     const inner = this._view === 'doel' ? this._vDoel() : this._view === 'stickers' ? this._vStickers() : this._vTaken();
     const toast = Date.now() < this._toast.until ? `<div class="toast">${tkEsc(this._toast.t)}</div>` : '';
-    const html = `<div class="root${this._c.volledig_scherm ? ' vol' : ''}${this._donker() ? ' dark' : ''}"><div class="wrap">${inner}</div>${toast}</div>`;
+    const html = `<div class="root${this._c.volledig_scherm ? ' vol' : ''}"><div class="wrap">${inner}</div>${toast}</div>`;
     if (html !== this._last) { this._last = html; this._r.innerHTML = html; }
     this._sbSync();
   }
