@@ -1,9 +1,9 @@
 {
- "album": "herfstpup",
- "titel": "Herfstpup",
+ "album": "herfstkonijnen",
+ "titel": "Herfstkonijnen",
  "van": "2026-09-01",
  "tot": "2027-02-28",
- "pad": "/local/stickers/herfstpup/",
+ "pad": "/local/stickers/herfstkonijnen/",
  "stickers": [
   {
    "id": "touwbal",
@@ -84,7 +84,7 @@
   },
   {
    "id": "blij",
-   "naam": "Blije pup",
+   "naam": "Blije konijnen",
    "soort": "gewoon",
    "nr": 12,
    "pagina": 2
@@ -147,7 +147,7 @@
   },
   {
    "id": "goud",
-   "naam": "Gouden herfstpup",
+   "naam": "Gouden herfstkonijnen",
    "soort": "goud",
    "nr": 21,
    "pagina": 4
