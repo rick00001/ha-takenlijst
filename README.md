@@ -24,9 +24,10 @@ taken/taken.json            jouw kinderen, taken en instellingen  ← aanpassen
 taken/albums/herfstpup.json stickeralbum (31 stickers)
 taken/albums/samen.json     samen-stickers (6)
 packages/taken.yaml         sensor, shell_command, scripts, automatiseringen
-www/taken-card.js           de kaart
-www/stickerboek-card.js     stickerboek (ook los te gebruiken op de tablet van een kind)
-www/stickers/…              de stickerplaatjes
+www/taken/taken-card.js     de kaart
+www/taken/taken-editor-card.js taken toevoegen, wijzigen en verwijderen
+www/taken/stickerboek-card.js stickerboek (ook los te gebruiken op de tablet van een kind)
+www/taken/stickers/…        de stickerplaatjes
 ```
 
 ## Installeren
@@ -37,14 +38,21 @@ www/stickers/…              de stickerplaatjes
    - `www/*` → `/config/www/`
 2. **Pas `/config/taken/taken.json` aan.** Zet je eigen kinderen bij `personen`, met de schrijfwijze die je op het scherm wilt zien, en zet je eigen taken bij `taken`. Uitleg staat hieronder.
 3. **Herstart Home Assistant volledig.** YAML herladen is niet genoeg voor `shell_command` en `command_line`. Na de herstart maakt de automatisering *Takenlijst verversen* `status.json` aan, en `sensor.taken_status` vult zich binnen een minuut.
-4. **Voeg de twee bronnen toe** onder Instellingen → Dashboards → ⋮ → Bronnen, beide als *JavaScript-module*:
-   - `/local/taken-card.js?v=1`
-   - `/local/stickerboek-card.js?v=3`
+4. **Voeg de kaartbronnen toe** onder Instellingen → Dashboards → ⋮ → Bronnen als *JavaScript-module*:
+   - `/local/taken/taken-card.js?v=1`
+   - `/local/taken/stickerboek-card.js?v=3`
+   - `/local/taken/taken-editor-card.js?v=4`
 5. **Maak een view van het type Paneel** met:
    ```yaml
    type: custom:taken-card
    ```
    Een paneel-view werkt het mooist, omdat de kaart dan het hele scherm vult. In een gewone view gebruik je `volledig_scherm: false`.
+
+   Voeg in een ouder-dashboard ook de taak-editor toe:
+
+   ```yaml
+   type: custom:taken-editor-card
+   ```
 
 **Optioneel: een eigen tablet per kind.** Zet daar alleen het stickerboek van dat kind op:
 
@@ -101,7 +109,7 @@ Een album bestaat uit `taken/albums/<naam>.json` plus de plaatjes in `www/sticke
 - **`pagina`:** 6 stickers per pagina.
 - **Samen-album:** een album met `"samen": true`. Een sticker met `"laatst": true` komt als laatste.
 
-PNG's van ongeveer 512×512 met een transparante achtergrond werken het best.
+PNG's van ongeveer 512×512 met een transparante achtergrond werken het best. Plaats ze onder `www/taken/stickers/<album>/`.
 
 ## Optionele automatiseringen in de package
 

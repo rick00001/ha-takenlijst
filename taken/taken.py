@@ -21,7 +21,7 @@ Gebruik:
   taken.py stickers   (pakt albums/*.zip uit naar /config/www/stickers/<album>/)
 Optioneel overal: --nu 'JJJJ-MM-DD HH:MM' (alleen voor testen).
 """
-import argparse, fcntl, json, os, random, tempfile, time
+import argparse, fcntl, json, os, random, re, tempfile, time
 from datetime import datetime, timedelta, date
 
 MAP = os.environ.get('TAKEN_MAP', '/config/taken')
@@ -246,6 +246,7 @@ def bereken(nu, vakantie):
         'samen': samen,
         'bijgewerkt': nu.strftime('%Y-%m-%d %H:%M'), 'schooldag': schooldag, 'vakantie': vakantie,
         'kinderen': kinderen, 'taken_dag': lijst['dag'], 'taken_week': lijst['week'], 'taken_ouder': lijst['ouder'],
+        'taak_config': cfg.get('taken', []),
         'bonus': bonus, 'bonus_suggesties': cfg.get('bonus_suggesties', []), 'bonus_max': cfg.get('bonus_max_sterren_per_dag', 2),
         'per_kind': per, 'maanddoel': doel, 'doelen_historie': historie[:12],
         'album': {'id': album['album'], 'titel': album['titel'], 'pad': album.get('pad', ''), 'van': album.get('van'), 'tot': album.get('tot'),
@@ -477,6 +478,54 @@ def _main():
         m = a.maand or nu.strftime('%Y-%m')
         doelen[m] = {'beloning': (a.beloning or '').strip()[:60], 'sterren': max(0, int(a.sterren or 0))}
         schrijf('doel.json', doelen)
+    elif a.actie == 'taak_opslaan':
+        try:
+            invoer = json.loads(a.taak or '')
+        except json.JSONDecodeError as e:
+            raise ValueError('Taakgegevens zijn geen geldige JSON') from e
+        if not isinstance(invoer, dict):
+            raise ValueError('Taakgegevens moeten een object zijn')
+        taak_id = str(invoer.get('id', '')).strip()
+        naam = re.sub(r'\s+', ' ', str(invoer.get('naam', ''))).strip()
+        soort = invoer.get('soort')
+        ritme = invoer.get('ritme')
+        if not re.fullmatch(r'[a-z0-9_]{1,48}', taak_id):
+            raise ValueError('Taak-id moet 1-48 kleine letters, cijfers of underscores bevatten')
+        if not naam or len(naam) > 80:
+            raise ValueError('Taaknaam moet 1-80 tekens bevatten')
+        if soort not in ('eigen', 'huis', 'ouder'):
+            raise ValueError('Ongeldig taaksoort')
+        interval = re.fullmatch(r'elke_(\d+)_dagen', str(ritme))
+        if ritme not in ('dag', 'schooldag', 'week', '2_weken_weekend', 'op_aanvraag') and not (interval and 1 <= int(interval.group(1)) <= 365):
+            raise ValueError('Ongeldig taakritme')
+        taak = {'id': taak_id, 'naam': naam, 'soort': soort, 'ritme': ritme}
+        for veld in ('telt_mee', 'optioneel', 'kinderklus'):
+            if invoer.get(veld):
+                taak[veld] = True
+        for veld in ('vanaf', 'tot'):
+            waarde = str(invoer.get(veld, '')).strip()
+            if waarde:
+                if not re.fullmatch(r'(?:[01][0-9]|2[0-3]):[0-5][0-9]', waarde):
+                    raise ValueError(f'{veld} moet een tijd in uu:mm zijn')
+                taak[veld] = waarde
+        toelichting = re.sub(r'\s+', ' ', str(invoer.get('toelichting', ''))).strip()
+        if toelichting:
+            taak['toelichting'] = toelichting[:120]
+        taken_cfg = cfg.setdefault('taken', [])
+        bestaand = next((i for i, t in enumerate(taken_cfg) if t.get('id') == taak_id), None)
+        if bestaand is None:
+            taken_cfg.append(taak)
+        else:
+            taken_cfg[bestaand] = taak
+        schrijf('taken.json', cfg)
+    elif a.actie == 'taak_verwijderen':
+        taak_id = str(a.taak or '').strip()
+        taken_cfg = cfg.get('taken', [])
+        nieuw = [t for t in taken_cfg if t.get('id') != taak_id]
+        if len(nieuw) == len(taken_cfg):
+            raise ValueError('Taak niet gevonden')
+        cfg['taken'] = nieuw
+        schrijf('taken.json', cfg)
 
     if a.actie != 'status' or not os.path.exists(P('log.json')):
         schrijf('log.json', log)

@@ -30,6 +30,7 @@ command_line:
         - schooldag
         - vakantie
         - kinderen
+        - taak_config
         - taken_dag
         - taken_week
         - taken_ouder
@@ -148,6 +149,21 @@ script:
       - action: shell_command.taken
         data:
           actie: aanvraag
+          taak: "{{ taak }}"
+      - action: homeassistant.update_entity
+        target: {entity_id: sensor.taken_status}
+
+  taken_bewerken:
+    alias: Taak toevoegen of wijzigen
+    description: "Voegt een taak toe of werkt een bestaande taak bij."
+    mode: queued
+    fields:
+      actie: {description: "taak_opslaan of taak_verwijderen", example: taak_opslaan}
+      taak: {description: "Taak-id of JSON-object met de taakvelden", example: '{"id":"tafel_dekken","naam":"Tafel dekken","soort":"huis","ritme":"dag"}'}
+    sequence:
+      - action: shell_command.taken
+        data:
+          actie: "{{ actie }}"
           taak: "{{ taak }}"
       - action: homeassistant.update_entity
         target: {entity_id: sensor.taken_status}
