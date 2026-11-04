@@ -55,9 +55,9 @@
    "pagina": 2
   },
   {
-   "id": "konijnenjarig",
-   "naam": "Hiep hiep hoera!!",
-   "soort": "gewoon",
+   "id": "golded",
+   "naam": "Golden",
+   "soort": "goud",    
    "nr": 8,
    "pagina": 2
   },
@@ -70,7 +70,7 @@
   },
   {
    "id": "paddenstoel",
-   "naam": "nog doen",
+   "naam": "Paddenstoelen",
    "soort": "gewoon",
    "nr": 10,
    "pagina": 2
@@ -104,8 +104,8 @@
    "pagina": 3
   },
   {
-   "id": "kussen",
-   "naam": "nog doen",
+   "id": "kusje",
+   "naam": "Kusje!!",
    "soort": "gewoon",
    "nr": 15,
    "pagina": 3
@@ -113,7 +113,7 @@
   {
    "id": "konijnengolden2a",
    "naam": "Gouden konijnen",
-   "soort": "zeldzaam",
+   "soort": "goud",
    "nr": 16,
    "pagina": 3
   },
@@ -146,9 +146,9 @@
    "pagina": 4
   },
   {
-   "id": "goud",
-   "naam": "nog doen",
-   "soort": "goud",
+   "id": "konijnenjarig",
+   "naam": "Hiep hiep hoera!!",
+   "soort": "gewoon",
    "nr": 21,
    "pagina": 4
   },
@@ -169,7 +169,7 @@
   {
    "id": "konijnengolden2",
    "naam": "Gouden konijnen",
-   "soort": "zeldzaam",
+   "soort": "goud",
    "nr": 24,
    "pagina": 4
   },
@@ -204,20 +204,20 @@
   {
    "id": "konijnengolden1",
    "naam": "Gouden konijnen",
-   "soort": "zeldzaam",
+   "soort": "goud",
    "nr": 29,
    "pagina": 5
   },
   {
    "id": "tennisbal",
-   "naam": "nog doen",
+   "naam": "Tennisbal",
    "soort": "gewoon",
    "nr": 30,
    "pagina": 5
   },
   {
    "id": "eekhoorn",
-   "naam": "nog doen",
+   "naam": "Eekhoorntjes",
    "soort": "zeldzaam",
    "nr": 31,
    "pagina": 6
