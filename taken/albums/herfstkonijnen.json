@@ -6,71 +6,71 @@
  "pad": "/local/taken/stickers/herfstkonijnen/",
  "stickers": [
   {
-   "id": "touwbal",
-   "naam": "Touwbal",
+   "id": "herfst",
+   "naam": "Herfst",
    "soort": "gewoon",
    "nr": 1,
    "pagina": 1
   },
   {
-   "id": "tak",
-   "naam": "Een mooie tak",
+   "id": "wortel",
+   "naam": "Lekker worteltje",
    "soort": "gewoon",
    "nr": 2,
    "pagina": 1
   },
   {
-   "id": "wortel",
-   "naam": "Wortel!",
+   "id": "sjaal",
+   "naam": "Lekker warme sjaal!",
    "soort": "gewoon",
    "nr": 3,
    "pagina": 1
   },
   {
-   "id": "kip",
-   "naam": "Piepkip",
+   "id": "skying",
+   "naam": "Op de latten!",
    "soort": "gewoon",
    "nr": 4,
+   "pagina": 1
+  },
+  {
+   "id": "pompoen",
+   "naam": "Pompoen",
+   "soort": "gewoon",
+   "nr": 5,
    "pagina": 1
   },
   {
    "id": "eikels",
    "naam": "Eikels zoeken",
    "soort": "gewoon",
-   "nr": 5,
-   "pagina": 1
-  },
-  {
-   "id": "kastanjes",
-   "naam": "Blaadje op mijn kop",
-   "soort": "gewoon",
    "nr": 6,
    "pagina": 1
   },
   {
-   "id": "sjaal",
-   "naam": "Herfstsjaal",
+   "id": "verstoppertje",
+   "naam": "Waar is Wollie?",
    "soort": "gewoon",
    "nr": 7,
    "pagina": 2
   },
   {
-   "id": "paraplu",
-   "naam": "Regenweer",
-   "soort": "gewoon",
+   "id": "golden",
+   "naam": "Golden",
+   "soort": "goud",    
    "nr": 8,
    "pagina": 2
   },
   {
-   "id": "pompoen",
-   "naam": "Pompoen",
+   "id": "kerst",
+   "naam": "Merry Christmas!",
    "soort": "gewoon",
    "nr": 9,
    "pagina": 2
   },
   {
    "id": "paddenstoel",
-   "naam": "Paddenstoel snuffelen",
+   "naam": "Paddenstoelen",
    "soort": "gewoon",
    "nr": 10,
    "pagina": 2
@@ -83,15 +83,15 @@
    "pagina": 2
   },
   {
-   "id": "blij",
-   "naam": "Blije konijnen",
+   "id": "modderpootjes",
+   "naam": "modder",
    "soort": "gewoon",
    "nr": 12,
    "pagina": 2
   },
   {
-   "id": "modder",
-   "naam": "Modderpootjes",
+   "id": "happybunies",
+   "naam": "Blije konijntjes",
    "soort": "gewoon",
    "nr": 13,
    "pagina": 3
@@ -104,57 +104,57 @@
    "pagina": 3
   },
   {
-   "id": "kussen",
-   "naam": "Slaapkop",
+   "id": "kusje",
+   "naam": "Kusje!!",
    "soort": "gewoon",
    "nr": 15,
    "pagina": 3
   },
   {
-   "id": "knuffel",
-   "naam": "Met zeehondknuffel",
-   "soort": "zeldzaam",
+   "id": "konijnengolden2a",
+   "naam": "Gouden konijnen",
+   "soort": "goud",
    "nr": 16,
    "pagina": 3
   },
   {
    "id": "stoel",
-   "naam": "Verstoppertje",
+   "naam": "Hangen rond de stoel",
    "soort": "gewoon",
    "nr": 17,
    "pagina": 3
   },
   {
-   "id": "likmat",
-   "naam": "Likmat",
+   "id": "liksteen",
+   "naam": "Liksteen",
    "soort": "gewoon",
    "nr": 18,
    "pagina": 3
   },
   {
    "id": "waterbak",
-   "naam": "Even uitrusten",
+   "naam": "Lekker drinken",
    "soort": "gewoon",
    "nr": 19,
    "pagina": 4
   },
   {
-   "id": "bladerhoop",
-   "naam": "Bladerhoop",
+   "id": "paraplu",
+   "naam": "Paraplu",
    "soort": "gewoon",
    "nr": 20,
    "pagina": 4
   },
   {
-   "id": "goud",
-   "naam": "Gouden herfstkonijnen",
-   "soort": "goud",
+   "id": "konijnenjarig",
+   "naam": "Hiep hiep hoera!!",
+   "soort": "gewoon",
    "nr": 21,
    "pagina": 4
   },
   {
-   "id": "plas",
-   "naam": "Plassen springen",
+   "id": "springeninplas",
+   "naam": "In een plas",
    "soort": "gewoon",
    "nr": 22,
    "pagina": 4
@@ -167,44 +167,44 @@
    "pagina": 4
   },
   {
-   "id": "kastanje_neus",
-   "naam": "Kastanje op mijn neus",
-   "soort": "zeldzaam",
+   "id": "konijnengolden2",
+   "naam": "Gouden konijnen",
+   "soort": "goud",
    "nr": 24,
    "pagina": 4
   },
   {
    "id": "laarzen",
-   "naam": "Laarzen aan",
+   "naam": "Laarzen",
    "soort": "gewoon",
    "nr": 25,
    "pagina": 5
   },
   {
-   "id": "blaadjes",
-   "naam": "Blaadjes vangen",
+   "id": "slapen",
+   "naam": "ZzZz",
    "soort": "gewoon",
    "nr": 26,
    "pagina": 5
   },
   {
-   "id": "kachel",
-   "naam": "Lekker warm",
+   "id": "houtkachel",
+   "naam": "Lekker voor de haard",
    "soort": "gewoon",
    "nr": 27,
    "pagina": 5
   },
   {
-   "id": "appel",
-   "naam": "Appel gevonden",
+   "id": "kastanje",
+   "naam": "Kastanjes!",
    "soort": "gewoon",
    "nr": 28,
    "pagina": 5
   },
   {
-   "id": "heksenhoed",
-   "naam": "Halloween",
-   "soort": "zeldzaam",
+   "id": "konijnengolden1",
+   "naam": "Gouden konijnen",
+   "soort": "goud",
    "nr": 29,
    "pagina": 5
   },
@@ -217,7 +217,7 @@
   },
   {
    "id": "eekhoorn",
-   "naam": "Eekhoorn gezien!",
+   "naam": "Eekhoorntjes",
    "soort": "zeldzaam",
    "nr": 31,
    "pagina": 6

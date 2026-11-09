@@ -1,0 +1,226 @@
+{
+  "album": "winterkonijnen",
+  "titel": "Winterkonijnen",
+  "van": "2028-03-01",
+  "tot": "2028-03-02",
+  "pad": "/local/taken/stickers/winterkonijnen/",
+  "stickers": [
+    {
+      "id": "winter",
+      "naam": "Winter",
+      "soort": "gewoon",
+      "nr": 1,
+      "pagina": 1
+    },
+    {
+      "id": "sneeuwkonijn",
+      "naam": "In de sneeuw",
+      "soort": "gewoon",
+      "nr": 2,
+      "pagina": 1
+    },
+    {
+      "id": "muts",
+      "naam": "Warme muts",
+      "soort": "gewoon",
+      "nr": 3,
+      "pagina": 1
+    },
+    {
+      "id": "schaatsen",
+      "naam": "Op het ijs",
+      "soort": "gewoon",
+      "nr": 4,
+      "pagina": 1
+    },
+    {
+      "id": "sneeuwpop",
+      "naam": "Sneeuwpop maken",
+      "soort": "gewoon",
+      "nr": 5,
+      "pagina": 1
+    },
+    {
+      "id": "sneeuwvlokken",
+      "naam": "Sneeuwvlokken",
+      "soort": "gewoon",
+      "nr": 6,
+      "pagina": 1
+    },
+    {
+      "id": "iglo",
+      "naam": "Konijneniglo",
+      "soort": "gewoon",
+      "nr": 7,
+      "pagina": 2
+    },
+    {
+      "id": "wintergolden1",
+      "naam": "Gouden konijnen",
+      "soort": "goud",
+      "nr": 8,
+      "pagina": 2
+    },
+    {
+      "id": "kerstboom",
+      "naam": "Kerstboom",
+      "soort": "gewoon",
+      "nr": 9,
+      "pagina": 2
+    },
+    {
+      "id": "kerstlichtjes",
+      "naam": "Kerstlichtjes",
+      "soort": "gewoon",
+      "nr": 10,
+      "pagina": 2
+    },
+    {
+      "id": "nieuwsgierig",
+      "naam": "Nieuwsgierig",
+      "soort": "gewoon",
+      "nr": 11,
+      "pagina": 2
+    },
+    {
+      "id": "ijspegel",
+      "naam": "IJspegel",
+      "soort": "gewoon",
+      "nr": 12,
+      "pagina": 2
+    },
+    {
+      "id": "blijekonijnen",
+      "naam": "Blije konijntjes",
+      "soort": "gewoon",
+      "nr": 13,
+      "pagina": 3
+    },
+    {
+      "id": "rendier",
+      "naam": "Hallo rendier!",
+      "soort": "zeldzaam",
+      "nr": 14,
+      "pagina": 3
+    },
+    {
+      "id": "knuffel",
+      "naam": "Warme knuffel",
+      "soort": "gewoon",
+      "nr": 15,
+      "pagina": 3
+    },
+    {
+      "id": "wintergolden2",
+      "naam": "Gouden konijnen",
+      "soort": "goud",
+      "nr": 16,
+      "pagina": 3
+    },
+    {
+      "id": "warmechoco",
+      "naam": "Warme chocolademelk",
+      "soort": "gewoon",
+      "nr": 17,
+      "pagina": 3
+    },
+    {
+      "id": "vogelvoer",
+      "naam": "Vogeltjes voeren",
+      "soort": "gewoon",
+      "nr": 18,
+      "pagina": 3
+    },
+    {
+      "id": "winterdrinkbak",
+      "naam": "Fris drinkwater",
+      "soort": "gewoon",
+      "nr": 19,
+      "pagina": 4
+    },
+    {
+      "id": "sleetje",
+      "naam": "Met de slee",
+      "soort": "gewoon",
+      "nr": 20,
+      "pagina": 4
+    },
+    {
+      "id": "vuurwerk",
+      "naam": "Gelukkig Nieuwjaar!",
+      "soort": "gewoon",
+      "nr": 21,
+      "pagina": 4
+    },
+    {
+      "id": "sneeuwengel",
+      "naam": "Sneeuwengel",
+      "soort": "gewoon",
+      "nr": 22,
+      "pagina": 4
+    },
+    {
+      "id": "roodborstje",
+      "naam": "Hallo roodborstje!",
+      "soort": "zeldzaam",
+      "nr": 23,
+      "pagina": 4
+    },
+    {
+      "id": "wintergolden3",
+      "naam": "Gouden konijnen",
+      "soort": "goud",
+      "nr": 24,
+      "pagina": 4
+    },
+    {
+      "id": "wanten",
+      "naam": "Warme wanten",
+      "soort": "gewoon",
+      "nr": 25,
+      "pagina": 5
+    },
+    {
+      "id": "winterslaap",
+      "naam": "Lekker slapen",
+      "soort": "gewoon",
+      "nr": 26,
+      "pagina": 5
+    },
+    {
+      "id": "openhaard",
+      "naam": "Bij de haard",
+      "soort": "gewoon",
+      "nr": 27,
+      "pagina": 5
+    },
+    {
+      "id": "kerstcadeau",
+      "naam": "Cadeautjes!",
+      "soort": "gewoon",
+      "nr": 28,
+      "pagina": 5
+    },
+    {
+      "id": "wintergolden4",
+      "naam": "Gouden konijnen",
+      "soort": "goud",
+      "nr": 29,
+      "pagina": 5
+    },
+    {
+      "id": "sneeuwbal",
+      "naam": "Sneeuwbal!",
+      "soort": "gewoon",
+      "nr": 30,
+      "pagina": 5
+    },
+    {
+      "id": "poolvos",
+      "naam": "Poolvos",
+      "soort": "zeldzaam",
+      "nr": 31,
+      "pagina": 6
+    }
+  ]
+}

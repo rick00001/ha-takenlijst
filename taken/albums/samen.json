@@ -5,36 +5,36 @@
  "pad": "/local/taken/stickers/samen/",
  "stickers": [
   {
-   "id": "samen_hartjes",
-   "naam": "Twee hartjes",
+   "id": "samen_kampvuurmarshmallows",
+   "naam": "Marshmallows",
    "soort": "samen",
    "nr": 1,
    "pagina": 1
   },
   {
-   "id": "samen_sjaal",
-   "naam": "Samen warm",
+   "id": "samen_haloween",
+   "naam": "Haloween",
    "soort": "samen",
    "nr": 2,
    "pagina": 1
   },
   {
-   "id": "samen_ballonnen",
-   "naam": "Feestje!",
+   "id": "samen_kerst",
+   "naam": "Kerst!",
    "soort": "samen",
    "nr": 3,
    "pagina": 1
   },
   {
-   "id": "samen_bank",
-   "naam": "Knus samen",
+   "id": "samen_hartjes",
+   "naam": "Hartjes",
    "soort": "samen",
    "nr": 4,
    "pagina": 1
   },
   {
-   "id": "samen_vlieger",
-   "naam": "Vliegeren",
+   "id": "samen_sneeuwballen",
+   "naam": "Sneeuwballen gevecht!",
    "soort": "samen",
    "nr": 5,
    "pagina": 1
