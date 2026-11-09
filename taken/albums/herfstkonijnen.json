@@ -8,11 +8,15 @@
   {
    "id": "herfst",
    "naam": "Herfst",
+   "id": "herfst",
+   "naam": "Herfst",
    "soort": "gewoon",
    "nr": 1,
    "pagina": 1
   },
   {
+   "id": "wortel",
+   "naam": "Lekker worteltje",
    "id": "wortel",
    "naam": "Lekker worteltje",
    "soort": "gewoon",
@@ -22,11 +26,15 @@
   {
    "id": "sjaal",
    "naam": "Lekker warme sjaal!",
+   "id": "sjaal",
+   "naam": "Lekker warme sjaal!",
    "soort": "gewoon",
    "nr": 3,
    "pagina": 1
   },
   {
+   "id": "skying",
+   "naam": "Op de latten!",
    "id": "skying",
    "naam": "Op de latten!",
    "soort": "gewoon",
@@ -36,6 +44,8 @@
   {
    "id": "pompoen",
    "naam": "Pompoen",
+   "id": "pompoen",
+   "naam": "Pompoen",
    "soort": "gewoon",
    "nr": 5,
    "pagina": 1
@@ -43,11 +53,15 @@
   {
    "id": "eikels",
    "naam": "Eikels zoeken",
+   "id": "eikels",
+   "naam": "Eikels zoeken",
    "soort": "gewoon",
    "nr": 6,
    "pagina": 1
   },
   {
+   "id": "verstoppertje",
+   "naam": "Waar is Wollie?",
    "id": "verstoppertje",
    "naam": "Waar is Wollie?",
    "soort": "gewoon",
@@ -64,12 +78,15 @@
   {
    "id": "kerst",
    "naam": "Merry Christmas!",
+   "id": "kerst",
+   "naam": "Merry Christmas!",
    "soort": "gewoon",
    "nr": 9,
    "pagina": 2
   },
   {
    "id": "paddenstoel",
+   "naam": "Paddenstoelen",
    "naam": "Paddenstoelen",
    "soort": "gewoon",
    "nr": 10,
@@ -85,11 +102,15 @@
   {
    "id": "modderpootjes",
    "naam": "modder",
+   "id": "modderpootjes",
+   "naam": "modder",
    "soort": "gewoon",
    "nr": 12,
    "pagina": 2
   },
   {
+   "id": "happybunies",
+   "naam": "Blije konijntjes",
    "id": "happybunies",
    "naam": "Blije konijntjes",
    "soort": "gewoon",
@@ -106,11 +127,16 @@
   {
    "id": "kusje",
    "naam": "Kusje!!",
+   "id": "kusje",
+   "naam": "Kusje!!",
    "soort": "gewoon",
    "nr": 15,
    "pagina": 3
   },
   {
+   "id": "konijnengolden2a",
+   "naam": "Gouden konijnen",
+   "soort": "goud",
    "id": "konijnengolden2a",
    "naam": "Gouden konijnen",
    "soort": "goud",
@@ -120,11 +146,14 @@
   {
    "id": "stoel",
    "naam": "Hangen rond de stoel",
+   "naam": "Hangen rond de stoel",
    "soort": "gewoon",
    "nr": 17,
    "pagina": 3
   },
   {
+   "id": "liksteen",
+   "naam": "Liksteen",
    "id": "liksteen",
    "naam": "Liksteen",
    "soort": "gewoon",
@@ -134,11 +163,14 @@
   {
    "id": "waterbak",
    "naam": "Lekker drinken",
+   "naam": "Lekker drinken",
    "soort": "gewoon",
    "nr": 19,
    "pagina": 4
   },
   {
+   "id": "paraplu",
+   "naam": "Paraplu",
    "id": "paraplu",
    "naam": "Paraplu",
    "soort": "gewoon",
@@ -149,10 +181,15 @@
    "id": "konijnenjarig",
    "naam": "Hiep hiep hoera!!",
    "soort": "gewoon",
+   "id": "konijnenjarig",
+   "naam": "Hiep hiep hoera!!",
+   "soort": "gewoon",
    "nr": 21,
    "pagina": 4
   },
   {
+   "id": "springeninplas",
+   "naam": "In een plas",
    "id": "springeninplas",
    "naam": "In een plas",
    "soort": "gewoon",
@@ -170,17 +207,23 @@
    "id": "konijnengolden2",
    "naam": "Gouden konijnen",
    "soort": "goud",
+   "id": "konijnengolden2",
+   "naam": "Gouden konijnen",
+   "soort": "goud",
    "nr": 24,
    "pagina": 4
   },
   {
    "id": "laarzen",
    "naam": "Laarzen",
+   "naam": "Laarzen",
    "soort": "gewoon",
    "nr": 25,
    "pagina": 5
   },
   {
+   "id": "slapen",
+   "naam": "ZzZz",
    "id": "slapen",
    "naam": "ZzZz",
    "soort": "gewoon",
@@ -190,6 +233,8 @@
   {
    "id": "houtkachel",
    "naam": "Lekker voor de haard",
+   "id": "houtkachel",
+   "naam": "Lekker voor de haard",
    "soort": "gewoon",
    "nr": 27,
    "pagina": 5
@@ -197,11 +242,16 @@
   {
    "id": "kastanje",
    "naam": "Kastanjes!",
+   "id": "kastanje",
+   "naam": "Kastanjes!",
    "soort": "gewoon",
    "nr": 28,
    "pagina": 5
   },
   {
+   "id": "konijnengolden1",
+   "naam": "Gouden konijnen",
+   "soort": "goud",
    "id": "konijnengolden1",
    "naam": "Gouden konijnen",
    "soort": "goud",
@@ -217,6 +267,7 @@
   },
   {
    "id": "eekhoorn",
+   "naam": "Eekhoorntjes",
    "naam": "Eekhoorntjes",
    "soort": "zeldzaam",
    "nr": 31,
