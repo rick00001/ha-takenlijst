@@ -32,7 +32,7 @@ const SB_CSS = `
   --sb-gold:var(--warning-color,#ff9800);
   --sb-acc:var(--primary-color);
 }
-.sb{font-family:var(--paper-font-body1_-_font-family);
+.sb{font-family:var(--paper-font-body1_-_font-family);position:relative;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
 .sb.los{background:var(--lovelace-background,var(--sb-bg));min-height:100vh;min-height:100dvh;padding:1.2em 1.4em;font-size:clamp(13px,min(1.6vw,2.6dvh),20px)}
 .serif{
   font-family:var(--paper-font-headline_-_font-family);
