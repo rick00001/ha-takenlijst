@@ -40,7 +40,7 @@ www/taken/stickers/…        de stickerplaatjes
 3. **Herstart Home Assistant volledig.** YAML herladen is niet genoeg voor `shell_command` en `command_line`. Na de herstart maakt de automatisering *Takenlijst verversen* `status.json` aan, en `sensor.taken_status` vult zich binnen een minuut.
 4. **Voeg de kaartbronnen toe** onder Instellingen → Dashboards → ⋮ → Bronnen als *JavaScript-module*:
    - `/local/taken/taken-card.js?v=1`
-   - `/local/taken/stickerboek-card.js?v=3`
+   - `/local/taken/stickerboek-card.js?v=4`
    - `/local/taken/taken-editor-card.js?v=4`
 5. **Maak een view van het type Paneel** met:
    ```yaml
@@ -103,8 +103,9 @@ Wijzigingen in `taken.json` worden binnen 5 minuten opgepikt; je hoeft niet te h
 
 ## Stickeralbums
 
-Een album bestaat uit `taken/albums/<naam>.json` plus de plaatjes in `www/stickers/<naam>/<id>.png`.
+Een album bestaat uit `taken/albums/<naam>.json` plus de plaatjes in `www/taken/stickers/<naam>/<id>.png`.
 - **Actief album:** het album waarvan vandaag tussen `van` en `tot` valt (het meegeleverde loopt tot eind februari 2027). Wil je een nieuw seizoen? Maak een nieuw album en laat de datums aansluiten.
+- **Vorige albums:** verlopen albums blijven in het stickerboek te bekijken. Laat het albumbestand en de bijbehorende plaatjes staan; kinderen kunnen via de albumknoppen door de pagina's bladeren en hun verdiende stickers in kleur terugzien.
 - **`soort` per sticker:** `gewoon`, `zeldzaam` of `goud`. Goud kan pas vallen als een kind 12 stickers heeft.
 - **`pagina`:** 6 stickers per pagina.
 - **Samen-album:** een album met `"samen": true`. Een sticker met `"laatst": true` komt als laatste.

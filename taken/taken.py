@@ -251,6 +251,7 @@ def bereken(nu, vakantie):
         'per_kind': per, 'maanddoel': doel, 'doelen_historie': historie[:12],
         'album': {'id': album['album'], 'titel': album['titel'], 'pad': album.get('pad', ''), 'van': album.get('van'), 'tot': album.get('tot'),
                   'stickers': [{'id': x['id'], 'naam': x['naam'], 'soort': x['soort'], 'nr': x['nr'], 'pagina': x['pagina']} for x in album['stickers']]} if album else None,
+        'album_archief': historische_albums(nu, album),
         'envelop_per': envelop_per(cfg),
     }
 
@@ -283,6 +284,33 @@ def actieve_albums(nu):
         if a.get('van', '0000') <= nu.strftime('%Y-%m-%d') <= a.get('tot', '9999'):
             res.append(a)
     return res
+
+
+def historische_albums(nu, actief):
+    """Metadata for expired individual albums, newest first."""
+    d = P('albums')
+    if not os.path.isdir(d):
+        return []
+    vandaag = nu.strftime('%Y-%m-%d')
+    res = []
+    for f in sorted(os.listdir(d)):
+        if not f.endswith('.json'):
+            continue
+        try:
+            a = json.load(open(os.path.join(d, f), encoding='utf-8'))
+        except (OSError, json.JSONDecodeError):
+            continue
+        if a.get('samen') or (actief and a.get('album') == actief['album']) or not a.get('tot') or a['tot'] >= vandaag:
+            continue
+        res.append({
+            'id': a['album'], 'titel': a.get('titel', a['album']),
+            'pad': a.get('pad') or f"/local/taken/stickers/{a['album']}/",
+            'van': a.get('van'), 'tot': a.get('tot'),
+            'stickers': [{'id': x['id'], 'naam': x.get('naam', x['id']), 'soort': x.get('soort', 'gewoon'),
+                          'nr': x.get('nr', i + 1), 'pagina': x.get('pagina', 1)}
+                         for i, x in enumerate(a.get('stickers', []))],
+        })
+    return sorted(res, key=lambda a: (a.get('van') or '', a['id']), reverse=True)
 
 
 def samen_album():

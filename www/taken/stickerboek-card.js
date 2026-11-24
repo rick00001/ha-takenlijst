@@ -1,4 +1,4 @@
-/* Stickerboek card, versie 3 (los pakket): envelopjes openen en het stickeralbum per kind.
+/* Stickerboek card, versie 4 (los pakket): envelopjes openen en stickeralbums per kind bekijken.
    Hoort bij de takenlijst (taken-card.js). Bestand: /config/www/stickerboek-card.js
    Gegevens: sensor.taken_status (/config/taken/status.json); openen via script.taken_envelop.
    Stickers: /config/www/stickers/<album>/<id>.png
@@ -43,6 +43,10 @@ const SB_CSS = `
 .wissel{display:flex;gap:.5em;margin-left:auto}
 .pil{min-height:44px;border:0;border-radius:999px;background:var(--sb-card);padding:0 1.2em;cursor:pointer;font-weight:500}
 .pil.on{background:var(--kc);color:#fff}
+.boeken{display:flex;gap:.5em;overflow-x:auto;padding:.1em .1em .8em;margin:-.35em 0 1em;scrollbar-width:thin}
+.boek{flex:none;min-height:44px;border:1px solid var(--sb-line);border-radius:999px;background:var(--sb-card);padding:0 1.1em;color:var(--sb-ink);cursor:pointer}
+.boek.on{background:var(--kc);border-color:var(--kc);color:#fff}
+.boek small{opacity:.75;margin-left:.35em}
 .lay{display:grid;grid-template-columns:minmax(14em,1fr) 2.4fr;gap:1.2em;align-items:start}
 .kaart{
   background:var(--ha-card-background,var(--card-background-color));
@@ -180,15 +184,26 @@ class StickerboekCard extends HTMLElement {
   _kinderen() { const k = this._st().kinderen; return Array.isArray(k) && k.length ? k : Object.keys(this._c.kleuren); }
   _kc(n) { const i = this._kinderen().indexOf(n); return this._c.kleuren[n] || PALET[(i < 0 ? 0 : i) % PALET.length]; }
 
-  _paginas() {
-    const st = this._st(), al = st.album, sa = (st.samen || {}).album;
+  _boeken() {
+    const st = this._st();
+    return [...(st.album ? [st.album] : []), ...(Array.isArray(st.album_archief) ? st.album_archief : [])];
+  }
+
+  _geselecteerdBoek() {
+    const st = this._st(), boeken = this._boeken();
+    if (this._boekId) return boeken.find((a) => a.id === this._boekId) || st.album || boeken[0] || null;
+    return st.album || boeken[0] || null;
+  }
+
+  _paginas(al = this._geselecteerdBoek()) {
+    const st = this._st(), sa = (st.samen || {}).album;
     const n = al ? Math.max(1, ...al.stickers.map((s) => Number(s.pagina) || 1)) : 0;
     return { n, samen: sa ? n + 1 : 0, totaal: n + (sa ? 1 : 0) };
   }
 
-  _zoek(id) {
+  _zoek(id, albumId) {
     const st = this._st();
-    for (const al of [st.album, (st.samen || {}).album]) {
+    for (const al of [...this._boeken(), (st.samen || {}).album].filter((x) => x && (!albumId || x.id === albumId))) {
       const s = al && al.stickers.find((x) => x.id === id);
       if (s) return { s, al };
     }
@@ -204,14 +219,15 @@ class StickerboekCard extends HTMLElement {
   _act(t) {
     const a = t.dataset.a;
     if (a === 'kind') { this._kind = t.dataset.k; this._pagina = null; return this._render(); }
+    if (a === 'boek') { this._boekId = t.dataset.id; this._pagina = 1; return this._render(); }
     if (a === 'pag') { this._pagina = Number(t.dataset.p) || 1; return this._render(); }
     if (a === 'blader') return this._blader(Number(t.dataset.r));
     if (a === 'open') return this._openStart(false);
     if (a === 'open-samen') return this._openStart(true);
     if (a === 'scheur') { if (this._fase === 'dicht') { this._fase = 'open'; this._renderOv(); } return; }
     if (a === 'plak') return this._plak();
-    if (a === 'toon') { if (this._veeg && Date.now() - this._veeg < 400) return; this._groot = t.dataset.id; this._fase = 'groot'; return this._renderOv(); }
-    if (a === 'sluit') { this._fase = null; this._groot = null; this._renderOv(); return this._render(); }
+    if (a === 'toon') { if (this._veeg && Date.now() - this._veeg < 400) return; this._groot = t.dataset.id; this._grootAlbum = t.dataset.album; this._fase = 'groot'; return this._renderOv(); }
+    if (a === 'sluit') { this._fase = null; this._groot = null; this._grootAlbum = null; this._renderOv(); return this._render(); }
   }
 
   _openStart(samen) {
@@ -234,7 +250,7 @@ class StickerboekCard extends HTMLElement {
     const le = this._st().laatste_envelop;
     if (le && le.ts && le.ts !== this._vorige && le.persoon === this._kind) {
       clearTimeout(this._wachtT);
-      const z = this._zoek(le.sticker);
+      const z = this._zoek(le.sticker, le.album);
       this._nieuw = { ...le, info: z ? z.s : { id: le.sticker, naam: le.sticker, soort: 'gewoon', pagina: 1 }, pad: z ? z.al.pad : '' };
       this._fase = 'dicht';
       this._renderOv();
@@ -244,7 +260,7 @@ class StickerboekCard extends HTMLElement {
   _plak() {
     const n = this._nieuw;
     this._fase = null;
-    if (n) { this._pagina = n.samen ? this._paginas().samen : Number(n.info.pagina) || 1; this._flits = n.sticker; setTimeout(() => { this._flits = null; this._render(); }, 4600); }
+    if (n) { this._boekId = n.album || null; this._pagina = n.samen ? this._paginas(this._geselecteerdBoek()).samen : Number(n.info.pagina) || 1; this._flits = n.sticker; setTimeout(() => { this._flits = null; this._render(); }, 4600); }
     this._renderOv();
     this._render();
   }
@@ -254,7 +270,7 @@ class StickerboekCard extends HTMLElement {
     if (!f) { this._ov.innerHTML = ''; return; }
     if (f === 'fout') { this._ov.innerHTML = `<div class="sb ov" data-a="sluit"><div class="doos"><div class="titel">Oeps</div><div class="sub">${sbEsc(this._fout)}</div><button class="knop" data-a="sluit">Oké</button></div></div>`; return; }
     if (f === 'groot') {
-      const z = this._zoek(this._groot), al = z && z.al, s = z && z.s;
+      const z = this._zoek(this._groot, this._grootAlbum), al = z && z.al, s = z && z.s;
       const mijn = s && (((this._st().per_kind || {})[this._kind] || {}).stickers || []).find((x) => x.id === this._groot && x.album === al.id);
       this._ov.innerHTML = s ? `<div class="sb ov" data-a="sluit"><div class="doos"><img class="groot" src="${sbEsc(al.pad + s.id + '.png')}" alt=""><div class="titel">${sbEsc(s.naam)}</div><div class="sub">${s.soort === 'samen' ? 'samen-sticker van ' + sbEsc(this._kinderen().join(' en ')) : 'nr. ' + s.nr}${s.soort === 'zeldzaam' ? ' · zeldzaam' : s.soort === 'goud' ? ' · goud' : ''}${mijn ? ' · gekregen op ' + sbEsc(sbDatum(mijn.op)) : ''}</div></div></div>` : '';
       return;
@@ -287,13 +303,20 @@ ${f === 'open' ? `<div class="straal"></div>${vonken}<img class="nieuwst" src="$
     if (!h.states[c.sensor]) return wrap('<div class="kaart">sensor.taken_status ontbreekt nog.</div>');
     const kids = this._kinderen();
     if (!this._kind || !kids.includes(this._kind)) this._kind = kids[0];
-    const k = this._kind, kc = this._kc(k), p = (st.per_kind || {})[k] || {}, al = st.album;
+    const k = this._kind, kc = this._kc(k), p = (st.per_kind || {})[k] || {}, actief = st.album;
+    const al = this._geselecteerdBoek(), isActief = !!(al && actief && al.id === actief.id);
     const wissel = c.persoon ? '' : `<div class="wissel">${kids.map((n) => `<button class="pil${n === k ? ' on' : ''}" style="--kc:${sbEsc(this._kc(n))}" data-a="kind" data-k="${sbEsc(n)}">${sbEsc(n)}</button>`).join('')}</div>`;
+    const boeken = this._boeken();
+    const boekKnoppen = boeken.length > (actief ? 1 : 0) ? `<div class="boeken" aria-label="Stickerboeken">${boeken.map((b) => {
+      const huidig = !!(actief && b.id === actief.id);
+      return `<button class="boek${al && b.id === al.id ? ' on' : ''}" data-a="boek" data-id="${sbEsc(b.id)}" aria-pressed="${!!(al && b.id === al.id)}">${sbEsc(b.titel)}<small>${huidig ? 'actief' : 'archief'}</small></button>`;
+    }).join('')}</div>` : '';
     const mijn = (p.stickers || []).filter((s) => al && s.album === al.id), heb = new Set(mijn.map((s) => s.id));
     const totaal = al ? al.stickers.length : 0;
     const env = Number(p.enveloppen) || 0, ep = Number(st.envelop_per) || 3, nog = Number(p.nog_tot_envelop) || ep - ((Number(p.sterren_totaal) || 0) % ep);
     let envBlok;
     if (!al) envBlok = `<div class="leeg-env"><div class="serif" style="font-size:1.2em">Nog geen album</div><div class="tag">Je envelopjes worden bewaard${env ? ` (${env})` : ''}.</div></div>`;
+    else if (!isActief) envBlok = `<div class="leeg-env"><div class="serif" style="font-size:1.2em">Dit boek is gesloten</div><div class="tag">Je verdiende stickers blijven bewaard.</div></div>`;
     else if (p.album_vol) envBlok = `<div class="leeg-env"><div class="serif" style="font-size:1.25em">Je album is vol! 🎉</div><div class="tag">${env ? `${env} ${env === 1 ? 'envelopje wordt' : 'envelopjes worden'} bewaard voor het volgende album.` : 'Knap gedaan!'}</div></div>`;
     else if (env) envBlok = `<button class="env-knop heeft" data-a="open">${sbEnvelop(kc)}<b>${env === 1 ? 'Je hebt 1 envelopje!' : `Je hebt ${env} envelopjes!`}</b><span class="tag">Tik om te openen</span></button>`;
     else envBlok = `<div class="leeg-env"><div class="serif" style="font-size:1.2em">Nog ${nog} ${nog === 1 ? 'ster' : 'sterren'}</div><div class="tag">tot je volgende envelopje</div></div>`;
@@ -308,20 +331,20 @@ ${envBlok}${samenBlok}
 <div class="sterren"><div><span class="st">★</span> <b class="serif">${Number(p.sterren_vandaag) || 0}</b> <span class="tag">vandaag</span></div><div><b class="serif">${Number(p.sterren_week) || 0}</b> <span class="tag">deze week</span></div></div></div>`;
     let rechts = '';
     if (al || sa) {
-      const P = this._paginas(), pags = P.totaal;
+      const P = this._paginas(al), pags = P.totaal;
       if (!this._pagina) this._pagina = 1;
       this._pagina = Math.min(this._pagina, pags);
       const pg = this._pagina, isSamen = !!P.samen && pg === P.samen, A = isSamen ? sa : al;
       const hebA = new Set((p.stickers || []).filter((s) => s.album === A.id).map((s) => s.id));
       const vakken = A.stickers.filter((s) => isSamen || (Number(s.pagina) || 1) === pg).sort((a, b) => a.nr - b.nr).map((s) => {
         const src = sbEsc(A.pad + s.id + '.png'), heb = hebA;
-        if (heb.has(s.id)) return `<button class="vak heb ${sbEsc(s.soort)}${this._flits === s.id ? ' nieuw' : ''}" data-a="toon" data-id="${sbEsc(s.id)}"><img src="${src}" alt="" loading="lazy"><span>${sbEsc(s.naam)}</span></button>`;
+        if (heb.has(s.id)) return `<button class="vak heb ${sbEsc(s.soort)}${this._flits === s.id ? ' nieuw' : ''}" data-a="toon" data-id="${sbEsc(s.id)}" data-album="${sbEsc(A.id)}"><img src="${src}" alt="" loading="lazy"><span>${sbEsc(s.naam)}</span></button>`;
         return `<div class="vak ${sbEsc(s.soort)}"><img class="sil" src="${src}" alt="" loading="lazy" draggable="false"><b class="vraag">?</b><span>${isSamen ? 'samen' : `nr. ${s.nr}`}${s.soort === 'goud' ? ' · goud' : ''}</span></div>`;
       }).join('');
-      rechts = `<div class="kaart album" style="--k1:${sbEsc(k1c)};--k2:${sbEsc(k2c)}"><div class="akop"><button class="nav" data-a="blader" data-r="-1" ${pg <= 1 ? 'disabled' : ''} aria-label="Vorige pagina">‹</button><div class="serif">${isSamen ? `Samen · ${sbEsc(kids.join(' en '))}` : `${sbEsc(al.titel)} · pagina ${pg}`}</div><button class="nav" data-a="blader" data-r="1" ${pg >= pags ? 'disabled' : ''} aria-label="Volgende pagina">›</button></div>
+      rechts = `<div class="kaart album" style="--k1:${sbEsc(k1c)};--k2:${sbEsc(k2c)}"><div class="akop"><button class="nav" data-a="blader" data-r="-1" ${pg <= 1 ? 'disabled' : ''} aria-label="Vorige pagina">‹</button><div class="serif">${isSamen ? `Samen · ${sbEsc(kids.join(' en '))}` : `${sbEsc(al.titel)} · pagina ${pg}${isActief ? '' : ' · archief'}`}</div><button class="nav" data-a="blader" data-r="1" ${pg >= pags ? 'disabled' : ''} aria-label="Volgende pagina">›</button></div>
 <div class="raster">${vakken}</div><div class="punten">${[...Array(pags)].map((_, i) => (P.samen && i + 1 === P.samen ? `<button class="punt hart${i + 1 === pg ? ' on' : ''}" data-a="pag" data-p="${i + 1}" aria-label="Pagina Samen">♥</button>` : `<button class="punt${i + 1 === pg ? ' on' : ''}" data-a="pag" data-p="${i + 1}" aria-label="Pagina ${i + 1}"></button>`)).join('')}</div></div>`;
     }
-    return wrap(`<div style="--kc:${sbEsc(kc)}"><div class="kop"><div class="serif naam">Stickerboek van ${sbEsc(k)}<small>${al ? `${sbEsc(al.titel)} · tot ${sbEsc(sbDatum(al.tot))}` : ''}</small></div>${wissel}</div>
+    return wrap(`<div style="--kc:${sbEsc(kc)}"><div class="kop"><div class="serif naam">Stickerboek van ${sbEsc(k)}<small>${al ? `${sbEsc(al.titel)} · ${isActief ? 'tot' : 'afgelopen op'} ${sbEsc(sbDatum(al.tot))}` : ''}</small></div>${wissel}</div>${boekKnoppen}
 <div class="lay">${links}${rechts}</div></div>`);
   }
 }

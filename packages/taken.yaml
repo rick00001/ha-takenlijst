@@ -41,6 +41,7 @@ command_line:
         - maanddoel
         - doelen_historie
         - album
+        - album_archief
         - envelop_per
         - laatste_envelop
         - samen
